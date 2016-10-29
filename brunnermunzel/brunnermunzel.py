@@ -74,10 +74,7 @@ Run Brunner-Munzel test aginst 2 list of samples, X and Y.
     f_hat_den = (nS2_x * nS2_x) / (N_x - 1) + (nS2_y * nS2_y) / (N_y - 1)
     f_hat = f_hat_num / f_hat_den
 
-
-    # int_t = scipy.stats.t.ppf(1 - (1.0 * alpha)/2, f_hat) * math.sqrt((S2_x / (N_x * N_y * N_y)) + (S2_y / N_x * N_x * N_y))
     int_t = scipy.stats.t.ppf(1 - (alpha/2), f_hat) * math.sqrt((S2_x / (N_x * N_y * N_y)) + (S2_y / (N_x * N_x * N_y)))
-    print int_t
     C_l = Pest - int_t
     C_h = Pest + int_t
 
@@ -93,15 +90,15 @@ Run Brunner-Munzel test aginst 2 list of samples, X and Y.
 	else:
 	    p_value = 2 * pt_l
 
-    return (W, f_hat, p_value, C_l, C_h)
+    return (W, f_hat, p_value, Pest, C_l, C_h)
 
 if __name__ == '__main__':
     # Simple test code.
     x = [1,2,1,1,1,1,1,1,1,1,2,4,1,1]
     y = [3,3,4,3,1,2,3,1,1,5,4]
 
-    (W, dof, p, Cl, Ch) = bm_test(x, y)
-    print (W, dof, p, Cl, Ch)
+    (W, dof, p, Pest, Cl, Ch) = bm_test(x, y)
+    print (W, dof, p, Pest, Cl, Ch)
 
     exit(0)
 #### EOF ###
