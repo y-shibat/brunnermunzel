@@ -5,6 +5,7 @@
 #
 # See LICENCE.txt
 import math
+import numpy
 import scipy.stats
 
 def _calc_S2(R, Ri, Ravr):
@@ -50,7 +51,15 @@ Run Brunner-Munzel test aginst 2 list of samples, X and Y.
     N_x = len(x)
     N_y = len(y)
 
-    R_total = scipy.stats.rankdata(x +  y, method='average')
+    if isinstance(x, numpy.ndarray):
+	x = x.tolist()
+    if isinstance(x, numpy.ndarray):
+	y = y.tolist()
+
+    cat_x_y = list(x)
+    cat_x_y.extend(y)
+
+    R_total = scipy.stats.rankdata(cat_x_y, method='average')
     R_x = R_total[:N_x]
     R_y = R_total[N_x:]
 
@@ -99,6 +108,12 @@ if __name__ == '__main__':
 
     (W, dof, p, Pest, Cl, Ch) = bm_test(x, y)
     print (W, dof, p, Pest, Cl, Ch)
+
+    ndx = numpy.array(x)
+    ndy = numpy.array(y)
+
+    (W, dof, p, Pest, Cl, Ch) = bm_test(ndx, ndy)
+    print (W, dof, p, Pest, Cl, Ch)    
 
     exit(0)
 #### EOF ###
