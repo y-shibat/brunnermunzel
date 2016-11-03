@@ -27,7 +27,8 @@ This function returns a tuple of (W, dof, p, Pest), where
   dof: degree of freedom
   p: p-value of the test
   Pest: Estimated effect size. 
-  Range of numerial list of the range of given condifidential level.
+  Cl: Low boundary of the range of numerial list of the range of given condifidential level.
+  Ch: High boundary of the range of numerial list of the range of given condifidential level.
 
 # Example
 
@@ -44,4 +45,3 @@ This prints following result on your console.
 # References
 The implementation is based on the description in next URL.
 <http://oku.edu.mie-u.ac.jp/~okumura/stat/brunner-munzel.html>
-
